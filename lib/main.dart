@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomePage(),
+      home: MyWidget(),
     );
   }
 }
@@ -41,22 +41,35 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('My Title')),
       body: Center(
-        child: Column(
-          spacing: 15,
-          children: [
-            Text('Login to Continue', style: TextStyle(fontSize: 20)),
-            TextFormField(
-              decoration: InputDecoration(border: OutlineInputBorder()),
-            ),
-            TextFormField(
-              decoration: InputDecoration(border: OutlineInputBorder()),
-            ),
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            spacing: 20,
+            children: [
+              Text('Login to Continue', style: TextStyle(fontSize: 20)),
+              TextFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Email',
+                ),
+              ),
+              TextFormField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
 
-            ElevatedButton(onPressed: () {
-              
-              print('Hello World');
-            }, child: Text('Login')),
-          ],
+                  hintText: 'Password',
+                ),
+              ),
+
+              ElevatedButton(
+                onPressed: () {
+                  print('Hello World');
+                },
+                child: Text('Login'),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -146,5 +159,50 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  int count = 0;
+  @override
+  void initState() {
+    print("hello 1");
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print(count);
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          Text(count.toString()),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                count++;
+              });
+            },
+            child: Text('Add'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    print("hello 3");
+    // TODO: implement dispose
+    super.dispose();
   }
 }
