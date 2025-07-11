@@ -11,47 +11,49 @@ class RegistrationPage extends StatelessWidget {
 
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          spacing: 20,
-          children: [
-            TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'First Name',
+        child: SingleChildScrollView(
+          child: Column(
+            spacing: 20,
+            children: [
+              TextFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'First Name',
+                ),
               ),
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Last Name',
+              TextFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Last Name',
+                ),
               ),
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Email',
+              TextFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Email',
+                ),
               ),
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Password',
+              TextFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                ),
               ),
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Confirm Password',
+              TextFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Confirm Password',
+                ),
               ),
-            ),
 
-            CustomButton(
-              title: 'Sign up',
-              onTap: () {
-                print('Sign up Tapped');
-              },
-            ),
-          ],
+              CustomButton(
+                title: 'Sign up',
+                onTap: () {
+                  print('Sign up Tapped');
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
