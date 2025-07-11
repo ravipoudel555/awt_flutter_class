@@ -1,4 +1,5 @@
 import 'package:awt_lab/features/auth/views/login_page.dart';
+import 'package:awt_lab/features/auth/views/registration_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: LoginPage(),
+      home: RegistrationPage(),
     );
   }
 }

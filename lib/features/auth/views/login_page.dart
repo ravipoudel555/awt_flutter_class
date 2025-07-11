@@ -1,3 +1,4 @@
+import 'package:awt_lab/features/auth/views/registration_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -53,6 +54,11 @@ class LoginPage extends StatelessWidget {
                   SizedBox(width: 5),
                   GestureDetector(
                     onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => RegistrationPage(),
+                        ),
+                      );
                       print('Register Tapped');
                     },
                     child: Text(
