@@ -1,3 +1,4 @@
+import 'package:awt_lab/core/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationPage extends StatelessWidget {
@@ -44,18 +45,11 @@ class RegistrationPage extends StatelessWidget {
               ),
             ),
 
-            InkWell(
-              onTap: () {},
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-
-                  borderRadius: BorderRadius.circular(100),
-                ),
-
-                child: Text('Sign up', style: TextStyle(color: Colors.white)),
-              ),
+            CustomButton(
+              title: 'Sign up',
+              onTap: () {
+                print('Sign up Tapped');
+              },
             ),
           ],
         ),

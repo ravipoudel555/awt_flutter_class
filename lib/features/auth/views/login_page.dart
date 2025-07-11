@@ -1,3 +1,4 @@
+import 'package:awt_lab/core/widgets/buttons.dart';
 import 'package:awt_lab/features/auth/views/registration_page.dart';
 import 'package:flutter/material.dart';
 
@@ -34,18 +35,11 @@ class LoginPage extends StatelessWidget {
               //   },
               //   child: Text('Login'),
               // ),
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-
-                  child: Text('Login', style: TextStyle(color: Colors.white)),
-                ),
+              CustomButton(
+                title: 'Login',
+                onTap: () {
+                  print('Login Tapped');
+                },
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,
