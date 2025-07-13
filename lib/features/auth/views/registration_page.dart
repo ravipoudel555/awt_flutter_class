@@ -1,4 +1,5 @@
 import 'package:awt_lab/core/widgets/buttons.dart';
+import 'package:awt_lab/features/auth/services/login_service.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -13,6 +14,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+
+  final LoginService _loginService = LoginService();
+
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,65 +26,89 @@ class _RegistrationPageState extends State<RegistrationPage> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
-          child: Column(
-            spacing: 20,
-            children: [
-              TextFormField(
-                controller: _emailController,
-                validator: (value) {
-                  if (value != null && value.isNotEmpty) {
-                    return null;
-                  } else {
-                    return 'Email is required';
-                  }
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Email',
-                ),
-              ),
-              TextFormField(
-                controller: _passwordController,
-                validator: (value) {
-                  if (value != null && value.isNotEmpty) {
-                    return null;
-                  } else {
-                    return 'Password is required';
-                  }
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                ),
-              ),
-              TextFormField(
-                controller: _confirmPasswordController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Confirm Password',
-                ),
-
-                validator: (value) {
-                  if (value != null && value.isNotEmpty) {
-                    if (value != _passwordController.text) {
-                      return 'Passwords do not match';
+          child: Form(
+            key: _formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Column(
+              spacing: 20,
+              children: [
+                TextFormField(
+                  controller: _emailController,
+                  validator: (value) {
+                    if (value != null && value.isNotEmpty) {
+                      return null;
+                    } else {
+                      return 'Email is required';
                     }
-                    return null;
-                  } else {
-                    return 'Confirm Password is required';
-                  }
-                },
-              ),
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Email',
+                  ),
+                ),
+                TextFormField(
+                  controller: _passwordController,
+                  validator: (value) {
+                    if (value != null && value.isNotEmpty) {
+                      return null;
+                    } else {
+                      return 'Password is required';
+                    }
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Password',
+                  ),
+                ),
+                TextFormField(
+                  controller: _confirmPasswordController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Confirm Password',
+                  ),
 
-              CustomButton(
-                title: 'Sign up',
-                onTap: () {
+                  validator: (value) {
+                    if (value != null && value.isNotEmpty) {
+                      if (value != _passwordController.text) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    } else {
+                      return 'Confirm Password is required';
+                    }
+                  },
+                ),
 
-                  
-                  print('Sign up Tapped');
-                },
-              ),
-            ],
+                isLoading
+                    ? CircularProgressIndicator()
+                    : CustomButton(
+                      title: 'Sign up',
+                      onTap: () async {
+                        if (_formKey.currentState?.validate() == true) {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          final message = await _loginService.register(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
+
+                          //checking to see if the current context(widget/page) exists in the RAM
+                          if (context.mounted) {
+                            // Display snackbar to show registration success or failure message
+                            ScaffoldMessenger.of(
+                              context,
+                            ).showSnackBar(SnackBar(content: Text(message)));
+                          }
+
+                          setState(() {
+                            isLoading = false;
+                          });
+                        }
+                      },
+                    ),
+              ],
+            ),
           ),
         ),
       ),
